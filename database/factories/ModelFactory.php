@@ -10,12 +10,14 @@
 | database. Just tell the factory how a default model should look.
 |
 */
+use App\User;
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
         'name' => $faker->name,
+        'username' => $faker->unique()->username,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),

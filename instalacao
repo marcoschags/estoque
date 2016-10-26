@@ -1,0 +1,34 @@
+##LAMP
+sudo apt-get -y install apache2
+sudo a2enmod rewrite
+sudo nano /etc/apache2/apache2.conf
+Encontrar o seguinte trecho de código
+<Directory /var/www/>
+   Options Indexes FollowSymLinks
+   AllowOverride None
+   Require all granted
+</Directory>
+Substituir "AllowOverride None" por  “AllowOverride All”
+sudo service apache2 restart
+sudo apt-get install unzip
+sudo apt-get -y install php7.0 libapache2-mod-php7.0
+sudo apt-get -y install php7.0-mysql php7.0-curl php7.0-gd php7.0-intl php-pear php-imagick php7.0-imap php7.0-mcrypt php-memcache  php7.0-pspell php7.0-recode php7.0-sqlite3 php7.0-tidy php7.0-xmlrpc php7.0-xsl php7.0-mbstring php-gettext php7.0-zip
+sudo systemctl restart apache2
+sudo apt install -y mysql-server
+sudo systemctl start mysql or sudo systemctl start mysql.service
+sudo apt-get -y install phpmyadmin
+
+##Composer
+curl -sS https://getcomposer.org/installer | php
+sudo mv composer.phar /usr/local/bin/composer
+export PATH=$PATH:~/.composer/vendor/bin/
+
+##Laravel
+composer global require "laravel/installer"
+composer create-project laravel/laravel estoque
+
+##Factories and Fakers
+use App\User;
+factory(User::class)->create();
+factory(User::class)->create(['username'=>'admin', 'email'=>'admin@admin.com.br', 'password'=>bcrypt('123456')]);
+php artisan migrate:refresh
